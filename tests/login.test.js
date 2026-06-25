@@ -1,9 +1,10 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
 const postLogin = JSON.parse(open('../fixtures/postLogin.json'));
+import { pegarBaseUrl } from '../utils/variaveis.js';
 
 export const options = {
-    
+
     stages: [
         { duration: '10s', target: 10 }, // Ramp-up to 10 users 
         { duration: '20s', target: 10 },  // Stay at 10 users 
@@ -18,7 +19,7 @@ export const options = {
 };
 
 export default function () {
-    const url = 'http://localhost:3000/login';
+    const url = pegarBaseUrl() + '/login';
 
     const payload = JSON.stringify(postLogin);
     const params = {
